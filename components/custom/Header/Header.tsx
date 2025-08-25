@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import * as React from "react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -42,6 +42,9 @@ import {
   BookOpen,
   Headphones,
 } from "lucide-react";
+import { RainbowButton } from "@/components/magicui/rainbow-button";
+import { ShimmerButton } from "@/components/magicui/shimmer-button";
+import Image from "next/image";
 
 // Simple theme toggle without providers. Adds/removes the `dark` class on <html>.
 function ThemeToggle() {
@@ -64,15 +67,34 @@ function ThemeToggle() {
     }
   };
   return (
-    <Button variant="ghost" size="icon" onClick={toggle} aria-label="Toggle theme">
+    <Button
+      variant="ghost"
+      size="icon"
+      onClick={toggle}
+      aria-label="Toggle theme"
+    >
       {isDark ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
     </Button>
   );
 }
 
-const NavLink = ({ href, children, className }: { href: string; children: React.ReactNode; className?: string }) => (
+const NavLink = ({
+  href,
+  children,
+  className,
+}: {
+  href: string;
+  children: React.ReactNode;
+  className?: string;
+}) => (
   <NavigationMenuLink asChild>
-    <Link href={href} className={cn("rounded-md px-3 py-2 text-sm font-medium hover:bg-accent hover:text-accent-foreground transition-colors", className)}>
+    <Link
+      href={href}
+      className={cn(
+        "rounded-md px-3 py-2 text-sm font-medium hover:bg-accent hover:text-accent-foreground transition-colors",
+        className
+      )}
+    >
       {children}
     </Link>
   </NavigationMenuLink>
@@ -82,10 +104,10 @@ export default function SiteHeader() {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b bg-background/70 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="container mx-auto flex h-16 items-center justify-between gap-3 px-4">
+    <header className="sticky top-0 z-50 w-full border-b bg-background/90 backdrop-blur supports-[backdrop-filter]:bg-background/99">
+      <div className=" mx-auto flex h-16 items-center justify-between gap-3 px-8 py-10">
         {/* Left: Logo + Mobile Menu */}
-        <div className="flex items-center gap-2">
+        <div className="min-w-[300px] flex items-center gap-2">
           <Sheet open={open} onOpenChange={setOpen}>
             <SheetTrigger asChild className="md:hidden">
               <Button variant="ghost" size="icon" aria-label="Open menu">
@@ -104,26 +126,63 @@ export default function SiteHeader() {
                   <Input placeholder="Search…" className="h-10" />
                 </div>
                 <nav className="grid gap-1 text-sm">
-                  <MobileItem href="#features" icon={<Boxes className="h-4 w-4" />}>Features</MobileItem>
-                  <MobileItem href="#use-cases" icon={<BookOpen className="h-4 w-4" />}>Use Cases</MobileItem>
-                  <MobileItem href="#resources" icon={<Headphones className="h-4 w-4" />}>Support</MobileItem>
-                  <MobileItem href="#pricing" icon={<ShoppingBag className="h-4 w-4" />}>Pricing</MobileItem>
+                  <MobileItem
+                    href="#features"
+                    icon={<Boxes className="h-4 w-4" />}
+                  >
+                    Features
+                  </MobileItem>
+                  <MobileItem
+                    href="#use-cases"
+                    icon={<BookOpen className="h-4 w-4" />}
+                  >
+                    Use Cases
+                  </MobileItem>
+                  <MobileItem
+                    href="#resources"
+                    icon={<Headphones className="h-4 w-4" />}
+                  >
+                    Support
+                  </MobileItem>
+                  <MobileItem
+                    href="#pricing"
+                    icon={<ShoppingBag className="h-4 w-4" />}
+                  >
+                    Pricing
+                  </MobileItem>
                 </nav>
                 <div className="mt-6 flex items-center gap-2">
-                  <Button className="flex-1" onClick={() => setOpen(false)}>Get Started</Button>
-                  <Button variant="outline" className="flex-1" onClick={() => setOpen(false)}>Sign In</Button>
+                  <Button className="flex-1" onClick={() => setOpen(false)}>
+                    Get Started
+                  </Button>
+                  <Button
+                    variant="outline"
+                    className="flex-1"
+                    onClick={() => setOpen(false)}
+                  >
+                    Sign In
+                  </Button>
                 </div>
               </div>
             </SheetContent>
           </Sheet>
 
-          <Link href="/" className="group inline-flex items-center gap-2">
+          <Link href="/" className="group inline-flex items-center gap-4">
             <div className="relative grid h-8 w-8 place-items-center rounded-xl bg-gradient-to-br from-primary to-primary/60 text-primary-foreground shadow-sm">
-              <Sparkles className="h-4 w-4" />
+              <Image
+                src="favicon.svg"
+                alt="Company Logo"
+                width={200}
+                height={80}
+              />
             </div>
             <div className="flex items-baseline gap-2">
-              <span className="text-base font-bold tracking-tight">YourBrand</span>
-              <Badge variant="secondary" className="hidden text-[10px] md:inline-flex">New</Badge>
+              <span className="text-xl font-bold tracking-tight">
+                Ankush Tripathi & Media
+              </span>
+              <Badge variant="secondary" className="hidden text-[10px]  ">
+                ⚡Bolt
+              </Badge>
             </div>
           </Link>
         </div>
@@ -133,7 +192,19 @@ export default function SiteHeader() {
           <NavigationMenu>
             <NavigationMenuList>
               <NavigationMenuItem>
-                <NavigationMenuTrigger>Products</NavigationMenuTrigger>
+                <NavLink href="#features" className="tracking-widest">
+                  HOME
+                </NavLink>
+              </NavigationMenuItem>
+              <NavigationMenuItem>
+                <NavLink href="#features" className="tracking-widest">
+                  ABOUT
+                </NavLink>
+              </NavigationMenuItem>
+              <NavigationMenuItem>
+                <NavigationMenuTrigger className="tracking-widest">
+                  SERVICES
+                </NavigationMenuTrigger>
                 <NavigationMenuContent className="p-4">
                   <div className="grid w-[500px] grid-cols-2 gap-3">
                     <ProductCard
@@ -159,66 +230,38 @@ export default function SiteHeader() {
                   </div>
                 </NavigationMenuContent>
               </NavigationMenuItem>
-
               <NavigationMenuItem>
-                <NavLink href="#features">Features</NavLink>
-              </NavigationMenuItem>
-              <NavigationMenuItem>
-                <NavLink href="#use-cases">Use Cases</NavLink>
-              </NavigationMenuItem>
-              <NavigationMenuItem>
-                <NavLink href="#pricing">Pricing</NavLink>
-              </NavigationMenuItem>
-              <NavigationMenuItem>
-                <NavLink href="#docs">Docs</NavLink>
+                <NavLink href="#docs" className="tracking-widest">
+                  CONTACT
+                </NavLink>
               </NavigationMenuItem>
             </NavigationMenuList>
           </NavigationMenu>
         </div>
 
         {/* Right: Actions */}
-        <div className="flex items-center gap-2">
+        <div className="min-w-[300px] flex justify-end items-center gap-2">
           <div className="hidden items-center gap-2 sm:flex">
-            <div className="relative w-48">
-              <Search className="pointer-events-none absolute left-2 top-1/2 h-4 w-4 -translate-y-1/2 opacity-60" />
-              <Input placeholder="Search…" className="pl-8 h-9" />
-            </div>
             <ThemeToggle />
           </div>
-
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button variant="ghost" className="gap-2">
-                <Avatar className="h-7 w-7">
-                  <AvatarImage src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?q=80&w=120&auto=format&fit=crop" alt="User" />
-                  <AvatarFallback>YU</AvatarFallback>
-                </Avatar>
-                <ChevronRight className="h-4 w-4 md:hidden" />
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end" className="w-56">
-              <DropdownMenuLabel className="text-xs text-muted-foreground">Signed in as</DropdownMenuLabel>
-              <div className="px-2 pb-2 text-sm font-medium">you@brand.com</div>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem asChild>
-                <Link href="#dashboard">Dashboard</Link>
-              </DropdownMenuItem>
-              <DropdownMenuItem asChild>
-                <Link href="#settings">Settings</Link>
-              </DropdownMenuItem>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem>Sign out</DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
-
-          <Button className="hidden sm:inline-flex">Get Started</Button>
+          <ShimmerButton className="text-white dark:text-white">
+            Get a Quote
+          </ShimmerButton>
         </div>
       </div>
     </header>
   );
 }
 
-function ProductCard({ title, description, href }: { title: string; description: string; href: string }) {
+function ProductCard({
+  title,
+  description,
+  href,
+}: {
+  title: string;
+  description: string;
+  href: string;
+}) {
   return (
     <Link
       href={href}
@@ -226,7 +269,9 @@ function ProductCard({ title, description, href }: { title: string; description:
     >
       <div className="flex items-start justify-between">
         <div>
-          <h4 className="text-sm font-semibold leading-none tracking-tight">{title}</h4>
+          <h4 className="text-sm font-semibold leading-none tracking-tight">
+            {title}
+          </h4>
           <p className="mt-1 text-xs text-muted-foreground">{description}</p>
         </div>
         <div className="grid h-8 w-8 place-items-center rounded-lg bg-muted/70">
@@ -241,7 +286,15 @@ function ProductCard({ title, description, href }: { title: string; description:
   );
 }
 
-function MobileItem({ href, children, icon }: { href: string; children: React.ReactNode; icon?: React.ReactNode }) {
+function MobileItem({
+  href,
+  children,
+  icon,
+}: {
+  href: string;
+  children: React.ReactNode;
+  icon?: React.ReactNode;
+}) {
   return (
     <Link
       href={href}

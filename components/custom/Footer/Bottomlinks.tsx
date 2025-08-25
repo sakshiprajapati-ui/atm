@@ -5,8 +5,10 @@ import { cn } from "@/lib/utils";
 
 const Bottomlinks = () => {
   return (
-    <div className="flex flex-col items-center justify-between gap-4 text-lg text-muted-foreground md:flex-row">
-      <p>© {new Date().getFullYear()} ATM. All rights reserved.</p>
+    <div className="flex flex-col items-center justify-between gap-4 text-lg text-black dark:text-white md:flex-row">
+      <p className="">
+        © {new Date().getFullYear()} ATM. All rights reserved.
+      </p>
       <div className="flex gap-4">Privacy Policy | T&C | Legal</div>
     </div>
   );
